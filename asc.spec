@@ -38,14 +38,17 @@ of the Battle Isle series from Bluebyte.
 %{__rm} -rf $RPM_BUILD_ROOT
 %makeinstall bindir=$RPM_BUILD_ROOT%{_gamesbindir}
 
-%{__install} -d $RPM_BUILD_ROOT%{_menudir}
-%{__cat} <<EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}):command="%{_gamesbindir}/%{name}" \
-		icon=%{name}.png \
-		needs="x11" \
-		section="More Applications/Games/Strategy" \
-		title="%{Summary}"\
-		longtitle="%{Summary}"
+%{__install} -d $RPM_BUILD_ROOT%{_datadir}/applications
+cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=%{Summary}
+Comment=%{Summary}
+Exec=%_gamesbindir/%{name}
+Icon=%{name}
+Terminal=false
+Type=Application
+Categories=X-MandrivaLinux-MoreApplications-Games-Strategy;Game;StrategyGame;
 EOF
 
 %{__install} %{SOURCE1} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
@@ -67,7 +70,7 @@ EOF
 %defattr(644,root,root,755)
 %doc README COPYING AUTHORS doc/
 %{_gamesdatadir}/%{name}
-%{_menudir}/%{name}
+%{_datadir}/applications/mandriva-%{name}.desktop
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
