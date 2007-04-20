@@ -15,7 +15,8 @@ License:	GPL
 Group:		Games/Strategy
 URL:		http://www.asc-hq.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	SDL_mixer-devel SDLmm-devel SDL_image-devel bzip2-devel
+BuildRequires:	SDL_mixer-devel SDLmm-devel SDL_image-devel
+BuildRequires:	bzip2-devel jpeg-devel
 BuildRequires:  libsigc++1.2-devel	
 
 %description
