@@ -1,6 +1,6 @@
 %define	name	asc
 %define version 1.16.4.0
-%define release %mkrel 2
+%define release %mkrel 3
 %define	Summary	Advanced Strategic Command
 
 Summary:	%{Summary}
@@ -8,7 +8,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-source-%{version}.tar.bz2
-Source1:        %{name}-16x16.png
+Source1:	%{name}-16x16.png
 Source2:	%{name}-32x32.png
 Source3:	%{name}-48x48.png
 License:	GPL
