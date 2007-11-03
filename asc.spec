@@ -24,6 +24,7 @@ BuildRequires:  freetype2-devel
 BuildRequires:  expat-devel
 BuildRequires:  libphysfs-devel
 BuildRequires:  png-devel
+BuildRequires:  zip
 
 %description
 ASC is a free, turn based strategy game. It is designed in the tradition
