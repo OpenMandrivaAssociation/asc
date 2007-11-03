@@ -21,6 +21,7 @@ BuildRequires:  libsigc++1.2-devel
 BuildRequires:  libgii-devel
 BuildRequires:  boost-devel
 BuildRequires:  freetype2-devel
+BuildRequires:  expat-devel
 
 %description
 ASC is a free, turn based strategy game. It is designed in the tradition
