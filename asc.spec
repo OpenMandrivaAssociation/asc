@@ -1,13 +1,13 @@
 %define	name	asc
-%define version 1.16.4.0
-%define release %mkrel 3
+%define version 2.0.1.0
+%define release %mkrel 1
 %define	Summary	Advanced Strategic Command
 
 Summary:	%{Summary}
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-source-%{version}.tar.bz2
+Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-%{version}.tar.bz2
 Source1:	%{name}-16x16.png
 Source2:	%{name}-32x32.png
 Source3:	%{name}-48x48.png
@@ -17,7 +17,8 @@ URL:		http://www.asc-hq.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	SDL_mixer-devel SDLmm-devel SDL_image-devel
 BuildRequires:	bzip2-devel jpeg-devel
-BuildRequires:  libsigc++1.2-devel	
+BuildRequires:  libsigc++1.2-devel
+BuildRequires:  libgii-devel
 
 %description
 ASC is a free, turn based strategy game. It is designed in the tradition
