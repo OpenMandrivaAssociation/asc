@@ -1,6 +1,6 @@
 %define	name	asc
 %define version 2.0.1.0
-%define release %mkrel 1
+%define release %mkrel 2
 %define	Summary	Advanced Strategic Command
 
 Summary:	%{Summary}
@@ -11,7 +11,8 @@ Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-%{version}.
 Source1:	%{name}-16x16.png
 Source2:	%{name}-32x32.png
 Source3:	%{name}-48x48.png
-License:	GPL
+Patch0:		asc-2.0.1.0-gcc43.patch
+License:	GPLv2+
 Group:		Games/Strategy
 URL:		http://www.asc-hq.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -34,6 +35,7 @@ of the Battle Isle series from Bluebyte.
 %setup -q
 # there seems to be a conflict with libintl defines
 # find . -type f -exec perl -pi -e 's/gettext/gettex_/g' {} \;
+%patch0 -p1
 
 %build
 %configure2_5x	--enable-genparse \
@@ -55,7 +57,7 @@ Exec=%_gamesbindir/%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Games-Strategy;Game;StrategyGame;
+Categories=Game;StrategyGame;
 EOF
 
 %{__install} %{SOURCE1} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
