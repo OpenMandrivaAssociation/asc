@@ -1,6 +1,6 @@
 %define	name	asc
-%define version 2.0.1.0
-%define release %mkrel 2
+%define version 2.1.0.0
+%define release %mkrel 1
 %define	Summary	Advanced Strategic Command
 
 Summary:	%{Summary}
@@ -11,7 +11,6 @@ Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-%{version}.
 Source1:	%{name}-16x16.png
 Source2:	%{name}-32x32.png
 Source3:	%{name}-48x48.png
-Patch0:		asc-2.0.1.0-gcc43.patch
 License:	GPLv2+
 Group:		Games/Strategy
 URL:		http://www.asc-hq.org/
@@ -35,7 +34,6 @@ of the Battle Isle series from Bluebyte.
 %setup -q
 # there seems to be a conflict with libintl defines
 # find . -type f -exec perl -pi -e 's/gettext/gettex_/g' {} \;
-%patch0 -p1
 
 %build
 %configure2_5x	--enable-genparse \
