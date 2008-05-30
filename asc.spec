@@ -16,7 +16,7 @@ License:	GPLv2+
 Group:		Games/Strategy
 URL:		http://www.asc-hq.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	SDL_mixer-devel SDLmm-devel SDL_image-devel
+BuildRequires:	SDL_mixer-devel SDLmm-devel SDL_image-devel SDL_sound-devel
 BuildRequires:	bzip2-devel jpeg-devel
 BuildRequires:  libsigc++1.2-devel
 BuildRequires:  libgii-devel
