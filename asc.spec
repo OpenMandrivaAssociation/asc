@@ -11,6 +11,10 @@ Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-%{version}.
 Source1:	%{name}-16x16.png
 Source2:	%{name}-32x32.png
 Source3:	%{name}-48x48.png
+Patch0:		fix_sg_cpp.patch
+Patch1:		fix_textfile_evaluation_cpp.patch
+Patch2:		fix_edmain_cpp.patch
+Patch3:		fix_mount_cpp.patch
 License:	GPLv2+
 Group:		Games/Strategy
 URL:		http://www.asc-hq.org/
@@ -32,6 +36,10 @@ of the Battle Isle series from Bluebyte.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 # there seems to be a conflict with libintl defines
 # find . -type f -exec perl -pi -e 's/gettext/gettex_/g' {} \;
 
