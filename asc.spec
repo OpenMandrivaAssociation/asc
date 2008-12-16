@@ -1,6 +1,6 @@
 %define	name	asc
 %define version 2.2.0.0
-%define release %mkrel 1
+%define release %mkrel 22
 %define	Summary	Advanced Strategic Command
 
 Summary:	%{Summary}
