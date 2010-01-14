@@ -1,6 +1,6 @@
 %define	name	asc
-%define version 2.2.0.0
-%define release %mkrel 24
+%define version 2.4.0.0
+%define release %mkrel 1
 %define	Summary	Advanced Strategic Command
 
 Summary:	%{Summary}
@@ -11,15 +11,19 @@ Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-%{version}.
 Source1:	%{name}-16x16.png
 Source2:	%{name}-32x32.png
 Source3:	%{name}-48x48.png
-Patch0:		fix_sg_cpp.patch
+#Patch0:		fix_sg_cpp.patch
 Patch1:		fix_textfile_evaluation_cpp.patch
-Patch2:		fix_edmain_cpp.patch
+#Patch2:		fix_edmain_cpp.patch
 Patch3:		fix_mount_cpp.patch
+Patch4:		asc-2.4.0.0-fix-str-fmt.patch
 License:	GPLv2+
 Group:		Games/Strategy
 URL:		http://www.asc-hq.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	SDL_mixer-devel SDLmm-devel SDL_image-devel SDL_sound-devel
+BuildRequires:	SDL_mixer-devel
+#BuildRequires:	SDLmm-devel
+BuildRequires:	SDL_image-devel
+BuildRequires:	SDL_sound-devel
 BuildRequires:	bzip2-devel jpeg-devel
 BuildRequires:  libsigc++1.2-devel
 BuildRequires:  libgii-devel
@@ -28,6 +32,8 @@ BuildRequires:  freetype2-devel
 BuildRequires:  expat-devel
 BuildRequires:  libphysfs-devel
 BuildRequires:  png-devel
+BuildRequires:  lua-devel
+BuildRequires:	libwxgtk2.8-devel
 BuildRequires:  zip
 
 %description
@@ -36,10 +42,11 @@ of the Battle Isle series from Bluebyte.
 
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1
 %patch3 -p1
+%patch4 -p0
 # there seems to be a conflict with libintl defines
 # find . -type f -exec perl -pi -e 's/gettext/gettex_/g' {} \;
 
@@ -51,11 +58,11 @@ of the Battle Isle series from Bluebyte.
 %make
 
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
-%makeinstall bindir=$RPM_BUILD_ROOT%{_gamesbindir}
+%{__rm} -rf %{buildroot}
+%makeinstall bindir=%{buildroot}%{_gamesbindir}
 
-%{__install} -d $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+%{__install} -d %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=%{Summary}
 Comment=%{Summary}
@@ -66,9 +73,9 @@ Type=Application
 Categories=Game;StrategyGame;
 EOF
 
-%{__install} %{SOURCE1} -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
-%{__install} %{SOURCE2} -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
-%{__install} %{SOURCE3} -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
+%{__install} %{SOURCE1} -D %{buildroot}%{_miconsdir}/%{name}.png
+%{__install} %{SOURCE2} -D %{buildroot}%{_iconsdir}/%{name}.png
+%{__install} %{SOURCE3} -D %{buildroot}%{_liconsdir}/%{name}.png
 
 %if %mdkversion < 200900
 %post
@@ -81,7 +88,7 @@ EOF
 %endif
 
 %clean
-%{__rm} -rf $RPM_BUILD_ROOT
+%{__rm} -rf %{buildroot}
 
 %files
 %defattr(755,root,root,755)
