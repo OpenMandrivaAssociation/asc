@@ -1,0 +1,13 @@
+Index: asc-2.2.0.0/source/textfile_evaluation.cpp
+===================================================================
+--- asc-2.2.0.0/source/textfile_evaluation.cpp
++++ asc-2.2.0.0/source/textfile_evaluation.cpp	2008-12-16 21:15:51.000000000 +0100
+@@ -720,7 +720,7 @@
+    if ( *p != 0 && *p != ';' ) {
+       ASCString s = name + ": value "+ entry.value +" is no numerical value \n" ;
+       // propertyContainer->error ( s );
+-      fprintf(stderr, s.c_str()  );
++      fprintf(stderr, "%s", s.c_str()  );
+    }
+    
+    return res;
