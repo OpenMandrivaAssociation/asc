@@ -1,31 +1,29 @@
 Summary:	Advanced Strategic Command
 Name:		asc
-Version:	2.4.0.0
-Release:	%mkrel 6
+Version:	2.5.0.0
+Release:	1
+License:	GPLv2+
+Group:		Games/Strategy
+URL:		http://www.asc-hq.org/
 Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-%{version}.tar.bz2
 Source1:	%{name}-16x16.png
 Source2:	%{name}-32x32.png
 Source3:	%{name}-48x48.png
-Patch1:		fix_textfile_evaluation_cpp.patch
-Patch3:		fix_mount_cpp.patch
-Patch4:		asc-2.4.0.0-fix-str-fmt.patch
-License:	GPLv2+
-Group:		Games/Strategy
-URL:		http://www.asc-hq.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	SDL_mixer-devel
-BuildRequires:	SDL_image-devel
-BuildRequires:	SDL_sound-devel
-BuildRequires:	bzip2-devel jpeg-devel
-BuildRequires:	libsigc++1.2-devel
-BuildRequires:	libgii-devel
+Patch0:		asc-2.5.0.0-gcc47.patch
 BuildRequires:	boost-devel
-BuildRequires:	freetype2-devel
-BuildRequires:	expat-devel
+BuildRequires:	bzip2-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	libgii-devel
 BuildRequires:	libphysfs-devel
-BuildRequires:	png-devel
-BuildRequires:	lua-devel
+BuildRequires:	SDL_image-devel
+BuildRequires:	SDL_mixer-devel
+BuildRequires:	SDL_sound-devel
 BuildRequires:	wxgtku-devel
+BuildRequires:	pkgconfig(expat)
+BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(lua)
+BuildRequires:	pkgconfig(sigc++-1.2)
 BuildRequires:	zip
 
 %description
@@ -34,9 +32,7 @@ of the Battle Isle series from Bluebyte.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch3 -p1
-%patch4 -p0
+%patch0 -p0
 # there seems to be a conflict with libintl defines
 # find . -type f -exec perl -pi -e 's/gettext/gettex_/g' {} \;
 
@@ -44,15 +40,14 @@ of the Battle Isle series from Bluebyte.
 %configure2_5x	--enable-genparse \
 		--disable-paragui \
 		--bindir=%{_gamesbindir} 
-%__perl -pi -e 's|^SUBDIRS = (.*)music(.*)|SUBDIRS = $1 $2|' data/Makefile
+perl -pi -e 's|^SUBDIRS = (.*)music(.*)|SUBDIRS = $1 $2|' data/Makefile
 %make
 
 %install
-%__rm -rf %{buildroot}
 %makeinstall bindir=%{buildroot}%{_gamesbindir}
 
-%__install -d %{buildroot}%{_datadir}/applications
-%__cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+install -d %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=%{summary}
 Comment=%{summary}
@@ -63,12 +58,9 @@ Type=Application
 Categories=Game;StrategyGame;
 EOF
 
-%__install %{SOURCE1} -D %{buildroot}%{_miconsdir}/%{name}.png
-%__install %{SOURCE2} -D %{buildroot}%{_iconsdir}/%{name}.png
-%__install %{SOURCE3} -D %{buildroot}%{_liconsdir}/%{name}.png
-
-%clean
-%__rm -rf %{buildroot}
+install %{SOURCE1} -D %{buildroot}%{_miconsdir}/%{name}.png
+install %{SOURCE2} -D %{buildroot}%{_iconsdir}/%{name}.png
+install %{SOURCE3} -D %{buildroot}%{_liconsdir}/%{name}.png
 
 %files
 %defattr(755,root,root,755)
@@ -81,3 +73,5 @@ EOF
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_mandir}/man6/*
+
+
