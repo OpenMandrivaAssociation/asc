@@ -4,7 +4,7 @@ Version:	2.5.0.0
 Release:	2
 License:	GPLv2+
 Group:		Games/Strategy
-URL:		http://www.asc-hq.org/
+URL:		https://www.asc-hq.org/
 Source0:	http://heanet.dl.sourceforge.net/sourceforge/asc-hq/%{name}-%{version}.tar.bz2
 Source1:	%{name}-16x16.png
 Source2:	%{name}-32x32.png
